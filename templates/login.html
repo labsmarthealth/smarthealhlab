@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin:0; font-family: 'Segoe UI', Arial, sans-serif;
+      display:flex; align-items:center; justify-content:center;
+      height:100vh; background:#0d1117; color:#e6edf3;
+    }
+    .card {
+      background:#161b22; padding:40px 32px;
+      border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.6);
+      width:100%; max-width:360px;
+    }
+    .logo {
+      text-align:center; font-size:22px; font-weight:600; margin-bottom:24px; color:#58a6ff;
+    }
+    h2 {
+      margin:0 0 20px; font-size:20px; text-align:center; color:#f0f6fc;
+    }
+    input {
+      width:100%; padding:12px;
+      margin:10px 0; border:1px solid #dde2e8;
+      border-radius:6px; font-size:14px;
+      background:#0d1117; color:#e6edf3;
+    }
+    input:focus {
+      outline:none; border-color:#58a6ff;
+      box-shadow:0 0 0 2px rgba(88,166,255,0.4);
+    }
+    button {
+      width:100%; padding:12px;
+      margin-top:15px; font-size:15px; font-weight:500;
+      background:#238636; color:#fff;
+      border:none; border-radius:6px; cursor:pointer;
+    }
+    button:hover { background:#2ea043; }
+    .msg {
+      color:#f85149; font-size:14px; text-align:center; margin-bottom:12px;
+    }
+    .forgot-password {
+      margin-top:12px;
+      text-align:center;
+    }
+    .forgot-password a {
+      color:#ffffff;
+      font-size:14px;
+      text-decoration:none;
+    }
+    .forgot-password a:hover {
+      text-decoration:underline;
+    }
+  </style>
+</head>
+<body>
+  <form class="card" method="post">
+    <div class="logo">⚙️ Lab Admin</div>
+    <h2>Sign in</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for cat,msg in messages %}
+          <div class="msg">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+
+    <!-- Links -->
+    <div style="text-align:center; margin-top:15px; font-size:14px;">
+       <a href="{{ url_for('forgot_password') }}">🔑 Reset with Old → New</a>
+      <br>
+      <a href="{{ url_for('request_otp') }}">📩 Reset with OTP</a>
+    </div>
+  </form>
+</body>
+</html>

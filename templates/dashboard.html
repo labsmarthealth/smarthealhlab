@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li class="active"><a href="{{ url_for('dashboard') }}">Patients</a></li>
+      <li><a href="{{ url_for('appointments') }}">Appointments</a></li>
+      
+    </ul>
+  </aside>
+
+  <!-- Main Section -->
+  <main class="main-content">
+    <header class="main-header">
+      <h1>Patients</h1>
+      <button id="newPatientBtn" class="btn primary">+ New Patient</button>
+    </header>
+
+    <!-- Patients Table -->
+    <div class="table-container">
+      <table id="patientsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Treatment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for patient in patients %}
+          <tr>
+            <td>{{ patient.name }}</td>
+            <td>{{ patient.mobile }}</td>
+            <td>{{ patient.email }}</td>
+            <td>{{ patient.location }}</td>
+            <td>{{ patient.treatment }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<header class="main-header">
+  <h1>Patients</h1>
+  <div>
+    <button id="newPatientBtn" class="btn primary">+ New Patient</button>
+    <a href="{{ url_for('download_patients') }}" class="btn secondary">⬇ Download Excel</a>
+  </div>
+</header>
+
+
+<!-- Modal for adding new patients -->
+<div id="patientModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Add New Patient</h2>
+    <form id="patientForm" method="POST" action="{{ url_for('add_patient') }}">
+      <label>Name*</label>
+      <input type="text" name="name" required>
+
+      <label>Email (optional)</label>
+      <input type="email" name="email">
+
+      <label>Mobile*</label>
+      <input type="text" name="mobile" required>
+
+      <label>Location*</label>
+      <input type="text" name="location" required>
+
+      <label>Treatment</label>
+      <input type="text" name="treatment">
+
+      <div class="modal-actions">
+        <button type="submit" class="btn primary">Add</button>
+        <button type="button" id="closeModal" class="btn secondary">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Modal open/close
+  const modal = document.getElementById('patientModal');
+  const openBtn = document.getElementById('newPatientBtn');
+  const closeBtn = document.getElementById('closeModal');
+
+  openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+  closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+</script>
+{% endblock %}
