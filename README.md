@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SmartLab Backend Starter (Flask)
 
 This is a minimal Flask backend with:
@@ -51,3 +52,7 @@ flask --app app.py run
 ## Notes
 - Database: SQLite file `smartlab.db` in the project root.
 - To logout, click "Logout" in the top-right of the dashboard.
+=======
+# smarthealhlab
+Flask backend for SmartHealLab
+>>>>>>> c9e9c8cdf9b549bdf543989b89c34420b6280518
